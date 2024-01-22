@@ -1,3 +1,4 @@
+<?php require_once 'fixer.php'; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,24 +12,24 @@
     <h1>DB content fixer</h1>
     <form action="fixer.php" method="post">
         <label for="db_host">DB host</label>
-        <input type="text" name="db_host" id="db_host" value="<?= $_POST["target_content"] ?? "localhost" ?>">
+        <input type="text" name="db_host" id="db_host" value="<?= $_POST["db_host"] ?? "localhost" ?>">
         <br>
         <label for="db_name">DB name</label>
-        <input type="text" name="db_name" id="db_name" value="test">
+        <input type="text" name="db_name" id="db_name" value="<?= $_POST["db_name"] ?? "" ?>">
         <br>
         <label for="db_user">DB user</label>
-        <input type="text" name="db_user" id="db_user" value="root">
+        <input type="text" name="db_user" id="db_user" value="<?= $_POST["db_user"] ?? "" ?>">
         <br>
         <label for="db_pass">DB password</label>
-        <input type="password" name="db_pass" id="db_pass" value="">
+        <input type="password" name="db_pass" id="db_pass" value="<?= $_POST["db_pass"] ?? "" ?>">
         <hr>
         <label for="target_content">Target content</label>
-        <textarea name="target_content" id="target_content" cols="30" rows="10"><?= $_POST["target_content"] ?></textarea>
+        <textarea name="target_content" id="target_content" cols="30" rows="10"><?= $_POST["target_content"] ?? "" ?></textarea>
         <br>
         <label for="replace_content">Replace content</label>
-        <textarea name="replace_content" id="replace_content" cols="30" rows="10"><?= $_POST["replace_content"] ?></textarea>
+        <textarea name="replace_content" id="replace_content" cols="30" rows="10"><?= $_POST["replace_content"] ?? "" ?></textarea>
         <br>
-        <input type="submit" value="fined">
+        <input type="submit" name="finder" value="fined">
         <?php if (isset($found) && !empty($found)): ?>
             <hr>
             <h2>Found content</h2>
@@ -52,7 +53,7 @@
             </table>
             <hr>
         <strong><?= count($found)?> items have been found. Fix it? </strong>
-            <input type="submit" value="fix">
+            <input type="submit" name="fixer" value="fix">
         <?php endif; ?>
     </form>
 </body>
